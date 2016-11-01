@@ -4,7 +4,7 @@ app.factory('commands', function (socket) {
 
     socket.on('stdout', function (stdout) {
         // console.log('')
-        stdouts.push(stdout);
+        stdouts.push({ type: 'output', cmd: stdout});
     });
 
     return {
@@ -13,6 +13,7 @@ app.factory('commands', function (socket) {
         },
         process: function (input) {
             socket.emit('stdin', input);
+            stdouts.push({ type: 'input', cmd: '>: '+input});
         }
     };
 });

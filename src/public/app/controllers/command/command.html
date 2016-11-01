@@ -9,7 +9,7 @@
 
 
     <div class="command-lines">
-        <div ng-repeat="stdout in commands.stdouts() track by $index">{{stdout}}</div>
+        <div ng-repeat="line in commands.lines() track by $index" ng-class="{'command-line-input':line.type=='input', 'command-line-output':line.type=='output'}">{{line.cmd}}</div>
     </div>
 
     <div class="command-input-container">
