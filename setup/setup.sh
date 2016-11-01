@@ -9,3 +9,4 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org mpg123
 
 sudo npm install pm2 -g
+sudo npm install gulp -g
