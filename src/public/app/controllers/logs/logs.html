@@ -1,0 +1,14 @@
+<div class="command">
+
+    <div class="command-label command-title">Logs</div>
+
+    <div class="command-label command-name">{{infos.name()}}</div>
+
+    <div class="command-label command-version">{{infos.version()}}</div>
+
+
+    <div class="command-lines">
+        <div ng-repeat="log in logs.logs()">{{log}}</div>
+    </div>
+
+</div>

@@ -1,0 +1,24 @@
+<html>
+
+<head>
+    <title>Jarvis log</title>
+</head>
+
+<body>
+Logs:
+<div id="logs">
+</div>
+
+</body>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+var socket = io(window.location.host);
+
+socket.on('logs', function (logs) {
+    document.getElementById('logs').innerHTML += logs+'<br>';
+});
+
+</script>
+
+</html>

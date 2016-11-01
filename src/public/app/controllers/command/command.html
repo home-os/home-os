@@ -1,0 +1,22 @@
+<div class="command">
+
+
+    <div class="command-label command-title">Commands</div>
+
+    <div class="command-label command-name">{{infos.name()}}</div>
+
+    <div class="command-label command-version">{{infos.version()}}</div>
+
+
+    <div class="command-lines">
+        <div ng-repeat="stdout in commands.stdouts() track by $index">{{stdout}}</div>
+    </div>
+
+    <div class="command-input-container">
+        <input class="command-input" type="text" ng-keydown="keyDown($event)" ng-model="input">
+    </div>
+    <!-- <div class="command-input"> -->
+
+    <!-- </div> -->
+
+</div>

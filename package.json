@@ -1,0 +1,36 @@
+{
+  "name": "home-os",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/os/app.js"
+  },
+  "config": {
+    "db": "mongodb://127.0.0.1/agenda"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/home-os/home-os.git"
+  },
+  "author": "Thibault Friedrich <tf@elqui.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/home-os/home-os/issues"
+  },
+  "homepage": "https://github.com/home-os/home-os#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "fs-extra": "^0.30.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.1.0",
+    "gulp-watch": "^4.3.10",
+    "mongodb": "^2.2.10",
+    "play": "^0.5.0",
+    "sequelize": "^3.24.3",
+    "socket.io": "^1.5.0",
+    "sqlite3": "^3.1.6",
+    "winston": "^2.2.0"
+  }
+}

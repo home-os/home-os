@@ -1,0 +1,88 @@
+
+
+// @neon: #f5fefd;
+
+@neonLight: #aec2e0;
+@neonDark: #267fb5;
+
+@dark: #14191f;
+
+.command {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    // background: black;
+    // font-family: Monaco, monospace;
+    background-color: @dark;
+    color: @neonLight;
+
+
+    &-lines {
+        position: fixed;
+        top: 15px;
+        bottom: 15px;
+        left: 15px;
+        right: 15px;
+
+        border: 2px solid @neonLight;
+        border-radius: 5px;
+        padding: 10px;
+        // font-family: courier, monospace;
+        font-family: 'Cutive Mono', monospace;
+    }
+
+    &-label {
+        font-weight: bold;
+        background-color: #14191f;
+        z-index: 10;
+        padding-left: 5px;
+        padding-right: 5px;
+        font-family: 'Cutive Mono', monospace;
+        text-transform: capitalize;
+    }
+
+    &-title {
+        position: fixed;
+        top: 5px;
+        left: 22px;
+    }
+
+    &-name {
+        position: fixed;
+        top: 5px;
+        right: 22px;
+    }
+
+    &-version {
+        position: fixed;
+        bottom: 5px;
+        right: 22px;
+    }
+
+    &-input {
+        display: block;
+        box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          -webkit-box-sizing: border-box;
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        background: @neonDark;
+        padding: 10px;
+        font-family: 'Cutive Mono', monospace;
+        font-size: 1.1em;
+        color: @dark;
+
+        &-container {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            right: 25px;
+        }
+
+    }
+}
