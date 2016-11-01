@@ -18,6 +18,9 @@
   padding: 10px;
   font-family: 'Cutive Mono', monospace;
 }
+.command-line-input {
+  font-weight: bold;
+}
 .command-label {
   font-weight: bold;
   background-color: #14191f;
@@ -51,7 +54,7 @@
   border: none;
   border-radius: 5px;
   outline: none;
-  background: #267fb5;
+  background: #aec2e0;
   padding: 10px;
   font-family: 'Cutive Mono', monospace;
   font-size: 1.1em;

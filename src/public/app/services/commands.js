@@ -1,19 +1,20 @@
 app.factory('commands', function (socket) {
 
-    var stdouts = [];
+    var lines = [];
 
     socket.on('stdout', function (stdout) {
-        // console.log('')
-        stdouts.push({ type: 'output', cmd: stdout});
+        console.log('stdout', stdout);
+        lines.push({ type: 'output', cmd: stdout});
     });
 
     return {
-        stdouts: function () {
-            return stdouts;
+        lines: function () {
+            return lines;
         },
         process: function (input) {
+            console.log('stdint', input);
             socket.emit('stdin', input);
-            stdouts.push({ type: 'input', cmd: '>: '+input});
+            lines.push({ type: 'input', cmd: '> '+input});
         }
     };
 });
