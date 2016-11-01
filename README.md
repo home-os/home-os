@@ -13,7 +13,9 @@ Setup your connected device with a standard linux distribution:
 
 > You can check if the software layer is operational by using the command `npm start`
 
-
+```javascript
+$ pm2 start --name="home-os" npm start
+```
 
 
 ### Development environment
@@ -28,21 +30,3 @@ $ vagrant ssh
 $ cd jarvis
 $ npm start
 ```
-
-### pm2
-
-> On connected device
-
-```javascript
-$ pm2 start npm -- start --name="home-os"
-
-```
-
-### vagrant
-
-
-
-
-
-
-* https://github.com/jas-/node-libnmap
