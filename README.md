@@ -11,8 +11,6 @@ Setup your connected device with a standard linux distribution:
 * for raspberry pi: see the file setup/raspberry-pi.md
 * ...
 
-Then, setup your software environment and follow the file setup/setup.md
-
 > You can check if the software layer is operational by using the command `npm start`
 
 
