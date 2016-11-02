@@ -10,17 +10,9 @@ const util = require('util');
 const os = require('os');
 const dotenv = require('dotenv');
 
-try {
+dotenv.config();
 
-    fs.accessSync(path.join(__dirname, '../../.env'));
-    dotenv.config();
-
-} catch (e) {
-
-}
-
-
-console.log(os.hostname());
+// console.log(os.hostname());
 
 // const play = require('./module/music');
 
@@ -62,7 +54,7 @@ var logger = new (winston.Logger)({
 
 var alarmMusic = path.join(folders['data/music'], '01.Moi... Lolita.mp3');
 
-server.listen(process.env.PORT || 80, function () {
+server.listen(process.env.PORT, function () {
     logger.info('listening on http://localhost:8080');
 });
 
