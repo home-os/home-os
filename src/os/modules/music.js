@@ -1,22 +1,17 @@
 // apt-get install mpg123
 
-const exec = require('child_process').exec;
+const spawn = require('child_process').spawn;
 
 var p = null;
 
 
 function play (filename) {
-    p = exec('mpg123 '+filename, function (error, stdout, stderr) {
-        if (error) {
-            console.error("exec error: ", error);
-            return;
-        }
-    });
+    p = spawn('mpg123 ', [filename]);
 }
 
 function stop () {
     if (null != p) {
-        p.kill('SIGTERM');
+        p.kill('SIGKILL');
     }
 }
 
