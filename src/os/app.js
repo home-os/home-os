@@ -10,7 +10,15 @@ const util = require('util');
 const os = require('os');
 const dotenv = require('dotenv');
 
-dotenv.config();
+try {
+
+    fs.accessSync(path.join(__dirname, '../../.env'));
+    dotenv.config();
+
+} catch (e) {
+
+}
+
 
 console.log(os.hostname());
 
