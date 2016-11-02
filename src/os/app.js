@@ -8,7 +8,9 @@ const winston = require('winston');
 const Agenda = require('agenda');
 const util = require('util');
 const os = require('os');
+const dotenv = require('dotenv');
 
+dotenv.config();
 
 console.log(os.hostname());
 
@@ -52,7 +54,7 @@ var logger = new (winston.Logger)({
 
 var alarmMusic = path.join(folders['data/music'], '01.Moi... Lolita.mp3');
 
-server.listen(8080, function () {
+server.listen(process.env.PORT || 80, function () {
     logger.info('listening on http://localhost:8080');
 });
 
