@@ -14,13 +14,14 @@ dotenv.config();
 
 // console.log(os.hostname());
 
-// const play = require('./module/music');
 
 // const Sequelize = require('sequelize');
 const packageJson = require('./../../package.json');
 const config = packageJson.config;
 const version = packageJson.version;
 const commands = require('./commands');
+const play = require('./module/music');
+
 
 var folders = {};
 
