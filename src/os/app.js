@@ -8,9 +8,9 @@ const winston = require('winston');
 const Agenda = require('agenda');
 const util = require('util');
 const os = require('os');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 
-dotenv.config();
+// dotenv.config();
 
 // console.log(os.hostname());
 
