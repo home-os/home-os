@@ -45,7 +45,10 @@ Once the raspbian is accessible, we need to setup the software layer:
 $ sudo apt-get install git
 $ git clone https://github.com/home-os/home-os.git ~/home-os
 
-$ cd ~/jarvis
+$ cd ~/home-os
 $ sudo sh ./setup/raspberry-pi.sh
+
+$ git clone https://github.com/adobe/node-smb-server.git ~/node-smb-server
+$ cd ~/node-smb-server
 
 ```

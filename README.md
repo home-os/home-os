@@ -14,7 +14,12 @@ Setup your connected device with a standard linux distribution:
 > You can check if the software layer is operational by using the command `npm start`
 
 ```javascript
-$ pm2 start --name="home-os" npm start
+$ cd ~/home-os
+$ npm install
+$ gulp less
+$ pm2 start --name="home-os" src/os/app.js
+$ cd ~/node-smb-server
+$ npm install
 ```
 
 

@@ -22,7 +22,7 @@ const commands = require('./commands');
 
 var folders = {};
 
-['node_modules', 'logs', 'data', 'music']
+['node_modules', 'logs', 'data', 'data/music']
 .forEach(function (folder) {
     folders[folder] = path.join(__dirname, '../../'+folder);
 });
@@ -50,7 +50,7 @@ var logger = new (winston.Logger)({
     ]
 });
 
-var alarmMusic = path.join(folders.music, '01.Moi... Lolita.mp3');
+var alarmMusic = path.join(folders['data/music'], '01.Moi... Lolita.mp3');
 
 server.listen(8080, function () {
     logger.info('listening on http://localhost:8080');
@@ -74,18 +74,38 @@ io.on('connection', function (socket) {
 
     socket.on('stdin', function (stdin) {
         logger.info('stdin', stdin);
-        socket.emit('stdout', commands.process(stdin));
+
+        var command = commands.process(stdin);
+
+        if (command == 'stop-alarm-clock') {
+            agenda.now('stop-alarm-clock');
+        } else if (command == 'start-alarm-clock') {
+            agenda.now('start-alarm-clock');
+        }
+
+        socket.emit('stdout', command);
+
     });
 });
 
 var agenda = new Agenda({db: {address: config.db}});
 
 //
-agenda.define('wake up', {priority: 'high', concurrency: 1}, function(job, done) {
-    logger.info('wake up');
+agenda.define('start-alarm-clock', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('start-alarm-clock');
+    play.play(alarmMusic)
     // play.play(alarmMusic);
     // play.sound(alarmMusic);
 });
+
+agenda.define('stop-alarm-clock', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('stop-alarm-clock');
+    play.stop();
+    // play.play(alarmMusic);
+    // play.sound(alarmMusic);
+});
+
+
 
 //
 // agenda.jobs({}, function(err, jobs) {
@@ -93,11 +113,9 @@ agenda.define('wake up', {priority: 'high', concurrency: 1}, function(job, done)
 //   // Work with jobs (see below)
 // });
 
-
-
 agenda.on('ready', function() {
     logger.info('agenda ready');
-    agenda.schedule('in 1 minute', 'wake up');
+    agenda.schedule('in 1 minute', 'start-alarm-clock');
     // agenda.schedule('today at 11am and 39 minutes', 'wake up');
     agenda.start();
 });

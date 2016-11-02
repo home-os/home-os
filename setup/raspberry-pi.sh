@@ -3,7 +3,7 @@ sudo apt-get update
 
 # sometimes useful on raspbian for checkout github repositories
 sudo apt-get install -y apt-transport-https
-sudo apt-get install -y build-essential # always useful
+sudo apt-get install -y build-essential vim# always useful
 
 # node js
 sudo apt-get install -y nodejs npm
