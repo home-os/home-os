@@ -16,7 +16,7 @@ function play (filename) {
 
 function stop () {
     if (null != p) {
-        p.kill('SIGHUP');
+        p.kill('SIGTERM');
     }
 }
 

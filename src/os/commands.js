@@ -8,6 +8,8 @@ function processCommand (stdin) {
         stdout = 'start-alarm-clock';
     } else if (stdin == 'stop alarm clock') {
         stdout = 'stop-alarm-clock';
+    } else {
+        stdout = 'unknown command';
     }
 
     return stdout;

@@ -118,7 +118,9 @@ agenda.define('stop-alarm-clock', {priority: 'high', concurrency: 1}, function(j
 
 agenda.on('ready', function() {
     logger.info('agenda ready');
-    agenda.schedule('in 1 minute', 'start-alarm-clock');
+    agenda.schedule('in 10 seconds', 'start-alarm-clock');
+
+    // agenda.schedule('in 1 minute', 'start-alarm-clock');
     // agenda.schedule('today at 11am and 39 minutes', 'wake up');
     agenda.start();
 });
