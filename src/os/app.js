@@ -54,7 +54,7 @@ var logger = new (winston.Logger)({
 
 var alarmMusic = path.join(folders['data/music'], '01.Moi... Lolita.mp3');
 
-server.listen(process.env.PORT, function () {
+server.listen(8080, function () {
     logger.info('listening on http://localhost:8080');
 });
 
