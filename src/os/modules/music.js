@@ -6,7 +6,7 @@ var p = null;
 
 
 function play (filename) {
-    p = spawn('mpg123 ', [filename]);
+    p = spawn('mpg123', [filename]);
 }
 
 function stop () {
