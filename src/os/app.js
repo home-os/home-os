@@ -52,7 +52,7 @@ var logger = new (winston.Logger)({
     ]
 });
 
-var alarmMusic = path.join(folders['data/music'], '01.Moi... Lolita.mp3');
+var alarmMusic = path.join(folders['data/music'], 'ToveLo-Habits.mp3');
 
 server.listen(8080, function () {
     logger.info('listening on http://localhost:8080');
