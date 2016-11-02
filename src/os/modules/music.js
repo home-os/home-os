@@ -6,7 +6,7 @@ var p = null;
 
 
 function play (filename) {
-    p = exec('mpg123 '+filename, (error, stdout, stderr) => {
+    p = exec('mpg123 '+filename, function (error, stdout, stderr) {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
