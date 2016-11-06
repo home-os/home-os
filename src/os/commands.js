@@ -29,7 +29,7 @@ function processCommand (stdin) {
         cmd.stdout = 'unknown command';
     }
 
-    return stdout;
+    return cmd;
 }
 
 
