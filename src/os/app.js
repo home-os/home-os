@@ -55,7 +55,7 @@ var logger = new (winston.Logger)({
     ]
 });
 
-var alarmMusic = path.join(folders['data/music'], 'ToveLo-Habits.mp3');
+var alarmMusic = path.join(folders['data/music'], 'Lykke\ Li\ -\ I\ Follow\ Rivers\ \(The\ Magician\ Remix\).mp3');
 
 var server = http.listen(process.env.PORT || 8080, function () {
     logger.info('listening on http://localhost:'+server.address().port);
