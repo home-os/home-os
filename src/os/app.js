@@ -96,7 +96,8 @@ var agenda = new Agenda({db: {address: config.db}});
 //
 agenda.define('start-alarm-clock', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('start-alarm-clock');
-    play.play(alarmMusic)
+    play.play(alarmMusic);
+    done();
     // play.play(alarmMusic);
     // play.sound(alarmMusic);
 });
@@ -104,6 +105,7 @@ agenda.define('start-alarm-clock', {priority: 'high', concurrency: 1}, function(
 agenda.define('stop-alarm-clock', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('stop-alarm-clock');
     play.stop();
+    done();
     // play.play(alarmMusic);
     // play.sound(alarmMusic);
 });
