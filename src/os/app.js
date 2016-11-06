@@ -95,7 +95,7 @@ var agenda = new Agenda({db: {address: config.db}});
 
 //
 agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
-    logger.info('start-alarm-clock');
+    logger.info('start-music');
     play.play(alarmMusic);
     done();
     // play.play(alarmMusic);
