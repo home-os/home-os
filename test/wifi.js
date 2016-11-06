@@ -1,4 +1,4 @@
-var wifi = require('../src/os/modules/wifi');
+var wifi = require('node-wifi'); //require('../src/os/modules/wifi');
 
 wifi.scan(function(err, networks) {
     if (err) {
