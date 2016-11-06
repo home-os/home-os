@@ -27,4 +27,4 @@ sudo apt-get install -y git # theorically already done
 sudo apt-get install -y mongodb-server
 
 # for music
-sudo apt-get install -y mpg123 amixer
+sudo apt-get install -y mpg123 amixer network-manager
