@@ -80,10 +80,10 @@ io.on('connection', function (socket) {
 
         var command = commands.process(stdin);
 
-        if (command == 'stop-alarm-clock') {
-            agenda.now('stop-alarm-clock');
-        } else if (command == 'start-alarm-clock') {
-            agenda.now('start-alarm-clock');
+        if (command == 'stop-music') {
+            agenda.now('stop-music');
+        } else if (command == 'start-music') {
+            agenda.now('start-music');
         }
 
         socket.emit('stdout', command);
@@ -94,7 +94,7 @@ io.on('connection', function (socket) {
 var agenda = new Agenda({db: {address: config.db}});
 
 //
-agenda.define('start-alarm-clock', {priority: 'high', concurrency: 1}, function(job, done) {
+agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('start-alarm-clock');
     play.play(alarmMusic);
     done();
@@ -102,8 +102,8 @@ agenda.define('start-alarm-clock', {priority: 'high', concurrency: 1}, function(
     // play.sound(alarmMusic);
 });
 
-agenda.define('stop-alarm-clock', {priority: 'high', concurrency: 1}, function(job, done) {
-    logger.info('stop-alarm-clock');
+agenda.define('stop-music', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('stop-music');
     play.stop();
     done();
     // play.play(alarmMusic);
@@ -120,7 +120,7 @@ agenda.define('stop-alarm-clock', {priority: 'high', concurrency: 1}, function(j
 
 agenda.on('ready', function() {
     logger.info('agenda ready');
-    agenda.schedule('in 30 seconds', 'start-alarm-clock');
+    agenda.schedule('in 30 seconds', 'start-music');
 
     // agenda.schedule('in 1 minute', 'start-alarm-clock');
     // agenda.schedule('today at 11am and 39 minutes', 'wake up');
