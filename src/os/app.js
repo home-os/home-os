@@ -140,7 +140,13 @@ agenda.define('set-volume', {priority: 'high', concurrency: 1}, function(job, do
 agenda.define('connect-wifi', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('connect-wifi', job.attrs.data);
     if (!jobs.attrs.data) {
-        wifi.connect();
+        wifi.connect(function (err) {
+            if (err) {
+                logger.info('connect-wifi-failed', err);
+            } else {
+                logger.info('connect-wifi-success');
+            }
+        });
     }
     done();
 });
