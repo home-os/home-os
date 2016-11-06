@@ -23,7 +23,7 @@ const version = packageJson.version;
 const commands = require('./commands');
 const music = require('./modules/music');
 const sound = require('./modules/sound');
-
+const wifi = require('./modules/wifi');
 
 var folders = {};
 
@@ -137,6 +137,14 @@ agenda.define('set-volume', {priority: 'high', concurrency: 1}, function(job, do
     done();
 });
 
+agenda.define('connect-wifi', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('connect-wifi', job.attrs.data);
+    if (!jobs.attrs.data) {
+        wifi.connect();
+    }
+    done();
+});
+
 
 //
 // agenda.jobs({}, function(err, jobs) {
@@ -151,4 +159,5 @@ agenda.on('ready', function() {
     // agenda.schedule('in 1 minute', 'start-alarm-clock');
     // agenda.schedule('today at 11am and 39 minutes', 'wake up');
     agenda.start();
+    agenda.now('connect-wifi');
 });
