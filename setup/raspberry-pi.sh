@@ -10,6 +10,11 @@ sudo apt-get install -y nodejs npm
 sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 sudo ln -s /usr/bin/npm /usr/local/bin/npm
 
+# authorize node js to use port < 1024
+# https://www.digitalocean.com/community/tutorials/how-to-use-pm2-to-setup-a-node-js-production-environment-on-an-ubuntu-vps
+sudo apt-get install libcap2-bin
+sudo setcap cap_net_bind_service=+ep /usr/bin/nodejs
+
 sudo npm install pm2 -g
 sudo npm install gulp -g
 

@@ -1,16 +1,16 @@
 const express = require('express');
 const app = express();
-const server = require('http').Server(app);
-const io = require('socket.io')(server);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const fs = require('fs-extra');
 const path = require('path');
 const winston = require('winston');
 const Agenda = require('agenda');
 const util = require('util');
 const os = require('os');
-// const dotenv = require('dotenv');
+const dotenv = require('dotenv');
 
-// dotenv.config();
+dotenv.config({silent: true});
 
 // console.log(os.hostname());
 
@@ -56,8 +56,8 @@ var logger = new (winston.Logger)({
 
 var alarmMusic = path.join(folders['data/music'], 'ToveLo-Habits.mp3');
 
-server.listen(8080, function () {
-    logger.info('listening on http://localhost:8080');
+var server = http.listen(process.env.PORT || 8080, function () {
+    logger.info('listening on http://localhost:'+server.address().port);
 });
 
 app

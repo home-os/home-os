@@ -19,7 +19,7 @@ function processCommand (stdin) {
         var match = stdin.match(/set volume ([0-9]+)/);
         cmd.id = 'set-volume';
         cmd.args.value = match[1];
-        cmd.stdout = 'set-music '+match[1];
+        cmd.stdout = 'set-volume '+match[1];
 
     } else {
         cmd.stdout = 'unknown command';
