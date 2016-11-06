@@ -10,6 +10,6 @@ function connect(callback) {
     wifi.connect({ ssid : "Livebox-C616", password : networks["Livebox-C616"] }, callback);
 }
 
-module.exports {
+module.exports = {
     connect: connect
 };
