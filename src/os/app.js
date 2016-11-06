@@ -20,7 +20,8 @@ const packageJson = require('./../../package.json');
 const config = packageJson.config;
 const version = packageJson.version;
 const commands = require('./commands');
-const play = require('./modules/music');
+const music = require('./modules/music');
+const sound = require('./modules/sound');
 
 
 var folders = {};
@@ -80,13 +81,15 @@ io.on('connection', function (socket) {
 
         var command = commands.process(stdin);
 
-        if (command == 'stop-music') {
+        if (command.id == 'stop-music') {
             agenda.now('stop-music');
-        } else if (command == 'start-music') {
+        } else if (command.id == 'start-music') {
             agenda.now('start-music');
+        } else if (command.id == 'set-volume') {
+            agenda.now('set-volume', command.args);
         }
 
-        socket.emit('stdout', command);
+        socket.emit('stdout', command.stdout);
 
     });
 });
@@ -96,20 +99,21 @@ var agenda = new Agenda({db: {address: config.db}});
 //
 agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('start-music');
-    play.play(alarmMusic);
+    music.play(alarmMusic);
     done();
-    // play.play(alarmMusic);
-    // play.sound(alarmMusic);
 });
 
 agenda.define('stop-music', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('stop-music');
-    play.stop();
+    music.stop();
     done();
-    // play.play(alarmMusic);
-    // play.sound(alarmMusic);
 });
 
+agenda.define('set-volume', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('set-volume', job.attrs.data.value);
+    sound.setVolume(job.attrs.data.value);
+    done();
+});
 
 
 //
@@ -120,7 +124,7 @@ agenda.define('stop-music', {priority: 'high', concurrency: 1}, function(job, do
 
 agenda.on('ready', function() {
     logger.info('agenda ready');
-    agenda.schedule('in 30 seconds', 'start-music');
+    // agenda.schedule('in 30 seconds', 'start-music');
 
     // agenda.schedule('in 1 minute', 'start-alarm-clock');
     // agenda.schedule('today at 11am and 39 minutes', 'wake up');

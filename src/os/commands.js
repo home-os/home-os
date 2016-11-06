@@ -1,15 +1,32 @@
 function processCommand (stdin) {
 
-    var stdout = '';
+    var cmd = {
+        id: '',
+        args: {},
+        stdout: ''
+    };
 
     if (stdin == "hello") {
-        stdout = 'hello';
+        cmd.id = 'hello';
+        cmd.stdout = 'hello';
     } else if (stdin == 'start music') {
-        stdout = 'start-music';
+        cmd.id = 'start-music';
+        cmd.stdout = 'start-music';
     } else if (stdin == 'stop music') {
-        stdout = 'stop-music';
+        cmd.id = 'stop-music';
+        cmd.stdout = 'stop-music';
+    } else if (stdin.startsWith('set volume')) {
+        cmd.id = 'set-music';
+
+        var match = stdin.match(/set volume ([0-9]+)/);
+        if (match) {
+            console.log(match);
+            cmd.args.value = match[1];
+            cmd.stdout = 'set-music '+match[1];
+        }
+
     } else {
-        stdout = 'unknown command';
+        cmd.stdout = 'unknown command';
     }
 
     return stdout;
