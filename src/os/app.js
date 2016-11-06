@@ -9,6 +9,7 @@ const Agenda = require('agenda');
 const util = require('util');
 const os = require('os');
 const dotenv = require('dotenv');
+const Cylon = require('cylon');
 
 dotenv.config({silent: true});
 
@@ -95,6 +96,26 @@ io.on('connection', function (socket) {
 });
 
 var agenda = new Agenda({db: {address: config.db}});
+
+var button
+
+Cylon.robot({
+  connections: {
+    arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
+  },
+
+  devices: {
+    led: { driver: 'led', pin: 13 },
+    button: { driver: 'button', pin: 2 }
+  },
+
+  work: function(my) {
+    my.button.on('push', function() {
+        agenda.now('stop-music');
+      //my.led.toggle()
+    });
+  }
+}).start();
 
 //
 agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
