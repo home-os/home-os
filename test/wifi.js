@@ -2,8 +2,7 @@ var wifi = require('node-wifi'); //require('../src/os/modules/wifi');
 
 //Initialize wifi module
 wifi.init({
-    debug : true, //verbose output
-    iface : null //set network interface
+    iface : 'wlan0' //set network interface
 });
 
 wifi.scan(function(err, networks) {
@@ -14,10 +13,11 @@ wifi.scan(function(err, networks) {
     }
 });
 
+/*
 wifi.connect(function (err) {
     if (err) {
         console.log('wifi failed', err);
     } else {
         console.log('connected');
     }
-});
+});*/
