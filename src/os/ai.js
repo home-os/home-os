@@ -25,6 +25,10 @@ function Ai(name) {
 
         if (words.length == 1 && natural.JaroWinklerDistance(words[0], Ai.name) > 0.7) {
             Ai.say(origin, 'Yes sire?', ':slightly_smiling_face:');
+        } else if (words.join(' ') == 'start music') {
+            Ai.run(origin, { id: 'start-music' });
+        } else if (words.join(' ') == 'stop-music') {
+            Ai.run(origin, { id: 'stop-music' });
         }
     };
 
