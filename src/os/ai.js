@@ -4,7 +4,7 @@ const natural = require('natural');
 
 function Ai (name) {
     EventEmitter.call(this);
-    var Ai = this;
+    // var Ai = this;
 
     this.name = name;
     this.isOnline = false;
@@ -12,32 +12,32 @@ function Ai (name) {
 
 
     this.start = function () {
-        Ai.emit('started');
+        this.emit('started');
     };
 
     this.setOnline = function (online) {
         this.isOnline = online;
-        Ai.say('default', 'Hello! I am now online', ':grinning:');
+        this.say('default', 'Hello! I am now online', ':grinning:');
     };
 
     this.analyzeMessage = function (origin, message) {
         var words = Ai.tokenizer.tokenize(message);
 
         if (words.length == 1 && natural.JaroWinklerDistance(words[0], Ai.name) > 0.7) {
-            Ai.say(origin, 'Yes sire?', ':slightly_smiling_face:');
+            this.say(origin, 'Yes sire?', ':slightly_smiling_face:');
         } else if (words.join(' ') == 'start music') {
-            Ai.run(origin, { id: 'start-music' });
+            this.run(origin, { id: 'start-music' });
         } else if (words.join(' ') == 'stop-music') {
-            Ai.run(origin, { id: 'stop-music' });
+            this.run(origin, { id: 'stop-music' });
         }
     };
 
     this.say = function (origin, text, icon_emoji) {
-        Ai.emit('say', { message: { text: text, icon_emoji: icon_emoji }, origin: origin });
+        this.emit('say', { message: { text: text, icon_emoji: icon_emoji }, origin: origin });
     };
 
     this.run = function (origin, cmd) {
-        Ai.emit('run', { cmd: cmd, origin: origin });
+        this.emit('run', { cmd: cmd, origin: origin });
     };
 }
 
