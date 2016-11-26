@@ -33,7 +33,7 @@ function Ai(name) {
     };
 
     this.say = function (origin, text, icon_emoji) {
-        Ai.emit('said', { message: { text: text, icon_emoji: icon_emoji }, origin: origin });
+        Ai.emit('say', { message: { text: text, icon_emoji: icon_emoji }, origin: origin });
     };
 
     this.run = function (origin, cmd) {

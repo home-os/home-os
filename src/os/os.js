@@ -47,7 +47,7 @@ var ai = new Ai(process.env.NAME);
 
 ai.start();
 
-ai.on('said', function (answer) {
+ai.on('say', function (answer) {
     console.log(message);
     if (answer.origin == 'default') {
         slackBot.sendMessage(answer.message);
