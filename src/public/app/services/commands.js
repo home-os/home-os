@@ -12,7 +12,7 @@ app.factory('commands', function (socket) {
             return lines;
         },
         process: function (input) {
-            console.log('stdint', input);
+            //console.log('stdint', input);
             socket.emit('stdin', input);
             lines.push({ type: 'input', cmd: '> '+input});
         }

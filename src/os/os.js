@@ -4,7 +4,6 @@ const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const fs = require('fs-extra');
 const path = require('path');
-const winston = require('winston');
 const Agenda = require('agenda');
 const util = require('util');
 const os = require('os');
@@ -14,8 +13,6 @@ const dotenv = require('dotenv');
 dotenv.config({silent: true});
 
 // console.log(os.hostname());
-
-
 // const Sequelize = require('sequelize');
 const packageJson = require('./../../package.json');
 const config = packageJson.config;
@@ -24,6 +21,16 @@ const commands = require('./commands');
 const music = require('./modules/music');
 const sound = require('./modules/sound');
 const wifi = require('./modules/wifi');
+const logger = require('./logger');
+const Ai = require('./ai');
+const SlackBot = require('./modules/communication/slack-bot');
+var slackBot = new SlackBot({
+    token: process.env.SLACK_API_TOKEN,
+    name: process.env.NAME,
+    login: process.env.SLACK_LOGIN
+});
+
+const WebBot = require('./modules/communication/web-bot');
 
 var folders = {};
 
@@ -33,32 +40,33 @@ var folders = {};
 });
 
 fs.ensureDirSync(folders.data);
-fs.ensureDirSync(folders.logs);
-
-var WebSocketLogger = winston.transports.CustomLogger = function (options) {
-    this.name = 'websocketLogger';
-    this.level = options.level || 'info';
-};
-
-util.inherits(WebSocketLogger, winston.Transport);
-
-WebSocketLogger.prototype.log = function (level, msg, meta, callback) {
-    io.sockets.emit('logs', new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '') +': '+msg);
-    // console.log(msg);
-};
-
-var logger = new (winston.Logger)({
-    transports: [
-        new (winston.transports.Console)(),
-        new (winston.transports.File)({ filename: path.join(folders.logs, 'logs.txt') }),
-        new (WebSocketLogger)({level: 'info'})
-    ]
-});
 
 var alarmMusic = path.join(folders['data/music'], 'Lykke\ Li\ -\ I\ Follow\ Rivers\ \(The\ Magician\ Remix\).mp3');
 
-var server = http.listen(process.env.PORT || 8080, function () {
-    logger.info('listening on http://localhost:'+server.address().port);
+var ai = new Ai(process.env.NAME);
+
+ai.start();
+
+ai.on('said', function (answer) {
+    console.log(message);
+    if (answer.origin == 'default') {
+        slackBot.sendMessage(answer.message);
+    } else {
+        answer.origin.sendMessage(answer.message);
+    }
+});
+
+ai.on('run', function (task) {
+    agenda.now(task.cmd.id, task.cmd.args);
+});
+
+slackBot.on('online', function () {
+    ai.setOnline(true);
+});
+
+slackBot.on('message', function (message) {
+    // console.log(message);
+    ai.analyzeMessage(medium, message.text);
 });
 
 app
@@ -70,54 +78,28 @@ app
 io.on('connection', function (socket) {
 
     socket.on('ask-for-name', function () {
-        socket.emit('name', os.hostname());
+        socket.emit('name', process.env.NAME);
     });
 
     socket.on('ask-for-version', function () {
         socket.emit('version', version);
     });
 
-    socket.on('stdin', function (stdin) {
-        logger.info('stdin', stdin);
+    var webBot = new WebBot(socket);
 
-        var command = commands.process(stdin);
-
-        if (command.id == 'stop-music') {
-            agenda.now('stop-music');
-        } else if (command.id == 'start-music') {
-            agenda.now('start-music');
-        } else if (command.id == 'set-volume') {
-            agenda.now('set-volume', command.args);
-        }
-
-        socket.emit('stdout', command.stdout);
-
+    webBot.on('message', function (message) {
+        ai.analyzeMessage(webBot, message.text);
     });
+
 });
 
+var server = http.listen(process.env.PORT || 8080, function () {
+    logger.info('listening on http://localhost:'+server.address().port);
+});
+
+// agenda
+
 var agenda = new Agenda({db: {address: config.db}});
-/*
-var button
-
-Cylon.robot({
-  connections: {
-    arduino: { adaptor: 'firmata', port: '/dev/ttyACM0' }
-  },
-
-  devices: {
-    led: { driver: 'led', pin: 13 },
-    button: { driver: 'button', pin: 2 }
-  },
-
-  work: function(my) {
-    my.button.on('push', function() {
-        agenda.now('stop-music');
-      //my.led.toggle()
-    });
-  }
-}).start();
-*/
-
 //
 agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('start-music');
@@ -165,5 +147,5 @@ agenda.on('ready', function() {
     // agenda.schedule('in 1 minute', 'start-alarm-clock');
     // agenda.schedule('today at 11am and 39 minutes', 'wake up');
     agenda.start();
-    agenda.now('connect-wifi');
+    // agenda.now('connect-wifi');
 });
