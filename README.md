@@ -4,22 +4,20 @@
 
 ### Production on connected device
 
-> On production environment, yo
-
 Setup your connected device with a standard linux distribution:
 
 * for raspberry pi: see the file setup/raspberry-pi.md
 * ...
 
-> You can check if the software layer is operational by using the command `npm start`
-
 ```javascript
+$ ssh pi@<hostname>.local
 $ cd ~/home-os
+
+// create the file .env (see after for more information)
+
 $ npm install
 $ gulp less
-$ pm2 start --name="home-os" src/os/app.js
-$ cd ~/node-smb-server
-$ npm install
+$ pm2 start --name="home-os" src/os/os.js
 ```
 
 
@@ -28,6 +26,9 @@ $ npm install
 > For development, use vagrant
 
 ```javascript
+
+// create the file .env (see after for more information)
+
 $ sudo apt-get install vagrant // you might need to install other dependencies
 $ npm install
 $ vagrant up
@@ -35,3 +36,11 @@ $ vagrant ssh
 $ cd jarvis
 $ npm start
 ```
+
+## Env file
+
+Create a file **.env** in the directory of **home-os** project with environment variables:
+
+* NAME: name of the bot (try to use the hostname)
+* SLACK_API_TOKEN: token of your slack bot
+* SLACK_LOGIN: login to receive slack messages

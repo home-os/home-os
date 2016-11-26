@@ -1,6 +1,8 @@
 const winston = require('winston');
 const fs = require('fs-extra');
 const path = require('path');
+const util = require('util');
+
 
 var WebSocketLogger = winston.transports.CustomLogger = function (options) {
     this.name = 'websocketLogger';
