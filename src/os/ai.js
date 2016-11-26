@@ -2,7 +2,7 @@ const util = require('util');
 const EventEmitter = require('events');
 const natural = require('natural');
 
-function Ai(name) {
+function Ai (name) {
     EventEmitter.call(this);
     var Ai = this;
 

@@ -21,6 +21,6 @@ function WebBot (websocket) {
 
 }
 
-util.inherits(SlackBot, EventEmitter);
+util.inherits(WebBot, EventEmitter);
 
-module.exports = SlackBot;
+module.exports = WebBot;
