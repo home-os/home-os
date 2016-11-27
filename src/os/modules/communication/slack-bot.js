@@ -20,6 +20,7 @@ function SlackBoty (config) {
 
     SlackBoty.bot.on('start', function() {
         // SlackBoty.started();
+        SlackBoty.emit('online');
     });
 
     SlackBoty.sendMessage = function (message) {
