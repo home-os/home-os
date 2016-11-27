@@ -1,4 +1,4 @@
-const SlackBots = require('slackbots');
+// const SlackBots = require('slackbots');
 const util = require('util');
 const EventEmitter = require('events');
 
@@ -6,17 +6,19 @@ function SlackBot (config) {
     EventEmitter.call(this);
     var SlackBot = this;
 
+/*
     this.bot = new SlackBots({
         token: config.token,
         name: config.name
-    });
+    });*/
 
     this.type = 'slack';
 
+/*
     this.bot.on('start', function() {
         SlackBot.emit('online');
     });
-
+*/
     this.sendMessage = function (message) {
         /*var params = {
             "icon_emoji": message.icon_emoji
