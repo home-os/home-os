@@ -3,14 +3,12 @@ const EventEmitter = require('events');
 const natural = require('natural');
 
 function Ai (name) {
-    // EventEmitter.call(this);
-    // var Ai = this;
+    EventEmitter.call(this);
+    var Ai = this;
 
     this.name = name;
     this.isOnline = false;
-    //this.tokenizer = new natural.WordTokenizer();
-
-    /*
+    this.tokenizer = new natural.WordTokenizer();
 
     this.start = function () {
         this.emit('started');
@@ -39,7 +37,7 @@ function Ai (name) {
 
     this.run = function (origin, cmd) {
         this.emit('run', { cmd: cmd, origin: origin });
-    };*/
+    };
 }
 
 // util.inherits(Ai, EventEmitter);

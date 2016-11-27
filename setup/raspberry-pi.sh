@@ -6,6 +6,7 @@ sudo apt-get install -y apt-transport-https
 sudo apt-get install -y build-essential vim# always useful
 
 # node js
+curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
 sudo apt-get install -y nodejs npm
 sudo ln -s /usr/bin/nodejs /usr/local/bin/node
 sudo ln -s /usr/bin/npm /usr/local/bin/npm
