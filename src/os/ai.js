@@ -19,15 +19,25 @@ function Ai (name) {
         this.say('default', 'Hello! I am now online', ':grinning:');
     };
 
+    this.hasWord = function (words, index, string) {
+        return natural.JaroWinklerDistance(words[index], string) > 0.7;
+    };
+
     this.analyzeMessage = function (origin, message) {
         var words = this.tokenizer.tokenize(message);
 
-        if (words.length == 1 && natural.JaroWinklerDistance(words[0], Ai.name) > 0.7) {
+        if (words.length == 1 && this.hasWord(words, 0, AI.name)) {
             this.say(origin, 'Yes sire?', ':slightly_smiling_face:');
-        } else if (words.join(' ') == 'start music') {
-            this.run(origin, { id: 'start-music' });
-        } else if (words.join(' ') == 'stop-music') {
-            this.run(origin, { id: 'stop-music' });
+        } else if (words.length >= 2 && this.hasWord(words, 1, 'music')) {
+            if (this.hasWord(words, 0, 'start')) {
+                this.run(origin, { id: 'start-music' });
+            } else if (this.hasWord(words, 0, 'stop')) {
+                this.run(origin, { id: 'stop-music' });
+            } else {
+                this.say(origin, 'Sorry, I don\'t know what you mean.', ':thinking_face:');
+            }
+        } else {
+            this.say(origin, 'Sorry, I don\'t know what you mean.', ':thinking_face:');
         }
     };
 
