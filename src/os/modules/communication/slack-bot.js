@@ -4,31 +4,31 @@ const EventEmitter = require('events');
 
 function SlackBot (config) {
     EventEmitter.call(this);
-    var SlackBot = this;
+    var thiis = this;
 
-    this.bot = new SlackBots({
+    thiis.bot = new SlackBots({
         token: config.token,
         name: config.name
     });
 
-    this.type = 'slack';
+    thiis.type = 'slack';
 
-    this.bot.on('start', function() {
-       SlackBot.emit('online');
+    thiis.bot.on('start', function() {
+       thiis.emit('online');
     });
 
-    this.sendMessage = function (message) {
+    thiis.sendMessage = function (message) {
         var params = {
             "icon_emoji": message.icon_emoji
         };
-        this.bot.postMessageToUser(config.login, message.text, params).always(function(data) {
+        thiis.bot.postMessageToUser(config.login, message.text, params).always(function(data) {
 
         });
     };
 
-    this.bot.on('message', function (message) {
+    thiis.bot.on('message', function (message) {
         if (message.username != config.name && message.type == 'message') {
-            SlackBot.emit('message', message);
+            thiis.emit('message', message);
         }
     });
 }
