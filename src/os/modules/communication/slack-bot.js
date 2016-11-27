@@ -2,41 +2,42 @@ const SlackBots = require('slackbots');
 const util = require('util');
 const EventEmitter = require('events');
 
-function SlackBot (config) {
-    EventEmitter.call(this);
-    var thiis = this;
+function SlackBoty (config) {
 
-    thiis.bot = new SlackBots({
+    EventEmitter.call(this);
+    var SlackBoty = this;
+
+    SlackBoty.bot = new SlackBots({
         token: config.token,
         name: config.name
     });
 
-    thiis.type = 'slack';
+    SlackBoty.type = 'slack';
 
-    thiis.started = function () {
-        thiis.emit('online');
+    SlackBoty.started = function () {
+        SlackBoty.emit('online');
     };
 
-    thiis.bot.on('start', function() {
-        thiis.started();
+    SlackBoty.bot.on('start', function() {
+        SlackBoty.started();
     });
 
-    thiis.sendMessage = function (message) {
+    SlackBoty.sendMessage = function (message) {
         var params = {
             "icon_emoji": message.icon_emoji
         };
-        thiis.bot.postMessageToUser(config.login, message.text, params).always(function(data) {
+        SlackBoty.bot.postMessageToUser(config.login, message.text, params).always(function(data) {
 
         });
     };
 
-    thiis.bot.on('message', function (message) {
+    SlackBoty.bot.on('message', function (message) {
         if (message.username != config.name && message.type == 'message') {
             // thiis.emit('message', message);
         }
     });
 }
 
-util.inherits(SlackBot, EventEmitter);
+util.inherits(SlackBoty, EventEmitter);
 
-module.exports = SlackBot;
+module.exports = SlackBoty;
