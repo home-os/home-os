@@ -3,7 +3,7 @@ const EventEmitter = require('events');
 const natural = require('natural');
 
 function Ai (name) {
-    EventEmitter.call(this);
+    // EventEmitter.call(this);
     // var Ai = this;
 
     this.name = name;
@@ -42,6 +42,6 @@ function Ai (name) {
     };*/
 }
 
-util.inherits(Ai, EventEmitter);
+// util.inherits(Ai, EventEmitter);
 
 module.exports = Ai;

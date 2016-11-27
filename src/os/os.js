@@ -45,6 +45,7 @@ var alarmMusic = path.join(folders['data/music'], 'Lykke\ Li\ -\ I\ Follow\ Rive
 
 var ai = new Ai(process.env.NAME);
 
+/*
 ai.start();
 
 ai.on('say', function (answer) {
@@ -58,7 +59,7 @@ ai.on('say', function (answer) {
 
 ai.on('run', function (task) {
     agenda.now(task.cmd.id, task.cmd.args);
-});
+});*/
 
 slackBot.on('online', function () {
     ai.setOnline(true);
