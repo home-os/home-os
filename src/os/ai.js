@@ -26,7 +26,7 @@ function Ai (name) {
     this.analyzeMessage = function (origin, message) {
         var words = this.tokenizer.tokenize(message);
 
-        if (words.length == 1 && this.hasWord(words, 0, AI.name)) {
+        if (words.length == 1 && this.hasWord(words, 0, Ai.name)) {
             this.say(origin, 'Yes sire?', ':slightly_smiling_face:');
         } else if (words.length >= 2 && this.hasWord(words, 1, 'music')) {
             if (this.hasWord(words, 0, 'start')) {
