@@ -66,7 +66,7 @@ slackBot.on('online', function () {
 
 slackBot.on('message', function (message) {
     // console.log(message);
-    ai.analyzeMessage(medium, message.text);
+    ai.analyzeMessage(slackBot, message.text);
 });
 
 app
