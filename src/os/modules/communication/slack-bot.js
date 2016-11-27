@@ -1,4 +1,4 @@
-// const SlackBots = require('slackbots');
+const SlackBots = require('slackbots');
 const util = require('util');
 const EventEmitter = require('events');
 
