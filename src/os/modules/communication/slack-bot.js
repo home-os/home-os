@@ -13,27 +13,24 @@ function SlackBot (config) {
 
     this.type = 'slack';
 
-
     this.bot.on('start', function() {
-       this.emit('online');
+       SlackBot.emit('online');
     });
 
     this.sendMessage = function (message) {
-        /*
         var params = {
             "icon_emoji": message.icon_emoji
         };
-        SlackBot.bot.postMessageToUser(config.login, message.text, params).always(function(data) {
+        this.bot.postMessageToUser(config.login, message.text, params).always(function(data) {
 
-        });*/
+        });
     };
 
-    /*
     this.bot.on('message', function (message) {
         if (message.username != config.name && message.type == 'message') {
-            //SlackBot.emit('message', message);
+            SlackBot.emit('message', message);
         }
-    });*/
+    });
 }
 
 util.inherits(SlackBot, EventEmitter);
