@@ -13,8 +13,12 @@ function SlackBot (config) {
 
     thiis.type = 'slack';
 
+    thiis.started = function () {
+        thiis.emit('online');
+    };
+
     thiis.bot.on('start', function() {
-    //    thiis.emit('online');
+        thiis.started();
     });
 
     thiis.sendMessage = function (message) {
