@@ -13,9 +13,10 @@ function SlackBot (config) {
 
     this.type = 'slack';
 
+    /*
     this.bot.on('start', function() {
         SlackBot.emit('online');
-    });
+    });*/
 
     this.sendMessage = function (message) {
         /*
