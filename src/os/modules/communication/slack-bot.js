@@ -14,7 +14,7 @@ function SlackBot (config) {
     thiis.type = 'slack';
 
     thiis.bot.on('start', function() {
-       thiis.emit('online');
+    //    thiis.emit('online');
     });
 
     thiis.sendMessage = function (message) {
@@ -28,7 +28,7 @@ function SlackBot (config) {
 
     thiis.bot.on('message', function (message) {
         if (message.username != config.name && message.type == 'message') {
-            thiis.emit('message', message);
+            // thiis.emit('message', message);
         }
     });
 }
