@@ -19,7 +19,7 @@ function SlackBoty (config) {
     };
 
     SlackBoty.bot.on('start', function() {
-        SlackBoty.started();
+        // SlackBoty.started();
     });
 
     SlackBoty.sendMessage = function (message) {
@@ -33,7 +33,7 @@ function SlackBoty (config) {
 
     SlackBoty.bot.on('message', function (message) {
         if (message.username != config.name && message.type == 'message') {
-            // thiis.emit('message', message);
+            SlackBoty.emit('message', message);
         }
     });
 }
