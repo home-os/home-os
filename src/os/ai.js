@@ -38,7 +38,7 @@ function Ai (name) {
             }
         } else if (words.length >= 3 && this.hasWord(words, 0, 'wake') && this.hasWord(words, 1, 'me') && this.hasWord(words, 2, 'up')) {
             var time = words.splice(0, 3);
-            this.say(origin, 'I will wake up at', time.join(' '));
+            this.say(origin, 'I will wake up at ' + time.join(' '));
             // this.run(origin, { id:'wake-up', args: { time: time } });
         } else {
             this.say(origin, 'Sorry, I don\'t know what you mean.', ':thinking_face:');
