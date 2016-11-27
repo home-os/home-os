@@ -36,6 +36,8 @@ function Ai (name) {
             } else {
                 this.say(origin, 'Sorry, I don\'t know what you mean.', ':thinking_face:');
             }
+        } else if (words.length >= 3 && this.hasWord(words, 0, 'wake') && this.hasWord(words, 1, 'me') && this.hasWord(words, 2, 'up')) {
+            this.run(origin, { id:'wake-up' });
         } else {
             this.say(origin, 'Sorry, I don\'t know what you mean.', ':thinking_face:');
         }

@@ -61,6 +61,7 @@ ai.on('run', function (task) {
 });
 
 slackBot.on('online', function () {
+    logger.info('slackbot-online');
     ai.setOnline(true);
 });
 
@@ -100,6 +101,18 @@ var server = http.listen(process.env.PORT || 8080, function () {
 // agenda
 
 var agenda = new Agenda({db: {address: config.db}});
+
+agenda.define('schedule-wake-up', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('schedule-wake-up');
+    agenda.schedule(job.attrs.data.time, 'wake-up');
+    done();
+});
+
+agenda.define('wake-up', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('wake-up');
+    ai.say('default', 'Hey! Wake up', ':grinning:');
+    done();
+});
 //
 agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('start-music');
