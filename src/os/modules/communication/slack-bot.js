@@ -6,11 +6,10 @@ function SlackBot (config) {
     EventEmitter.call(this);
     var SlackBot = this;
 
-/*
     this.bot = new SlackBots({
         token: config.token,
         name: config.name
-    });*/
+    });
 
     this.type = 'slack';
 
