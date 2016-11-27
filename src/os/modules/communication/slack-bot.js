@@ -26,12 +26,13 @@ function SlackBot (config) {
         });*/
     };
 
+    /*
     this.bot.on('message', function (message) {
         if (message.username != config.name && message.type == 'message') {
             //SlackBot.emit('message', message);
         }
     });
-
+    */
 }
 
 util.inherits(SlackBot, EventEmitter);
