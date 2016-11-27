@@ -40,6 +40,6 @@ function Ai (name) {
     };
 }
 
-// util.inherits(Ai, EventEmitter);
+util.inherits(Ai, EventEmitter);
 
 module.exports = Ai;
