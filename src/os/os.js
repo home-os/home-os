@@ -57,7 +57,11 @@ ai.on('say', function (answer) {
 });
 
 ai.on('run', function (task) {
-    agenda.now(task.cmd.id, task.cmd.args);
+    if (task.time) {
+        agenda.schedule(task.time, 'ai-do', task);
+    } else {
+        agenda.now(task.cmd.id, task.cmd.args);
+    }
 });
 
 slackBot.on('online', function () {
@@ -102,17 +106,25 @@ var server = http.listen(process.env.PORT || 8080, function () {
 
 var agenda = new Agenda({db: {address: config.db}});
 
-agenda.define('schedule-wake-up', {priority: 'high', concurrency: 1}, function(job, done) {
-    logger.info('schedule-wake-up');
-    agenda.schedule(job.attrs.data.time, 'wake-up');
+agenda.define('ai-do', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('ai-do');
+    ai.do(job.attrs.data);
     done();
 });
+/*
+agenda.define('reminder', {priority: 'high', concurrency: 1}, function(job, done) {
+    logger.info('reminder');
+    ai.say('default', 'Do no forget to '+job.attrs.data.todo);
+    done();
+});*/
 
+/*
 agenda.define('wake-up', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('wake-up');
     ai.say('default', 'Hey! Wake up', ':grinning:');
     done();
-});
+});*/
+
 //
 agenda.define('start-music', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('start-music');
