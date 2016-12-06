@@ -58,6 +58,7 @@ ai.on('say', function (answer) {
 
 ai.on('run', function (task) {
     if (task.time) {
+        logger.info('agenda.schedule', task.timme, 'ai-do', task);
         agenda.schedule(task.time, 'ai-do', task);
     } else {
         agenda.now(task.cmd.id, task.cmd.args);
