@@ -40,7 +40,7 @@ function Ai (name) {
     this.do = function (task) {
         console.log(task);
         if (task.cmd.id == 'reminder') {
-            ai.say('default', 'Do no forget to ' + task.cmd.todo + ' (' + task.time + ')');
+            this.say('default', 'Do no forget to ' + task.cmd.todo + ' (' + task.time + ')');
         } else {
             this.say('default', 'Sorry, I don\'t know what you mean.', ':thinking_face:');
         }
