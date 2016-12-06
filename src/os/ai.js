@@ -63,7 +63,9 @@ function Ai (name) {
                 var schedule = words.splice(0, indexOfTo-1);
                 words.splice(0, 1);
                 this.say(origin, 'Ok I will do that');
-                this.run(origin, { id:'reminder', args: {  todo: words.join(' ') } }, schedule.join(' '));
+                console.log( words.join(' '), schedule.join(' '));
+
+                //this.run(origin, { id:'reminder', args: {  todo: words.join(' ') } }, schedule.join(' '));
             } else {
                 this.say(origin, 'Sorry but I think your request is incorrect. The proper way is "reminds me <when> to <what>."', ':thinking_face:');
             }
