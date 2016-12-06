@@ -30,6 +30,8 @@ var slackBot = new SlackBot({
     login: process.env.SLACK_LOGIN
 });
 
+var agenda = new Agenda({db: {address: config.db}});
+
 const WebBot = require('./modules/communication/web-bot');
 
 var folders = {};
@@ -59,7 +61,7 @@ ai.on('say', function (answer) {
 ai.on('run', function (task) {
     if (task.time) {
         logger.info('agenda.schedule', task.time, 'ai-do', task);
-        agenda.schedule(task.time, 'ai-do', task);
+        // agenda.schedule(task.time, 'ai-do', task);
     } else {
         agenda.now(task.cmd.id, task.cmd.args);
     }
@@ -105,7 +107,6 @@ var server = http.listen(process.env.PORT || 8080, function () {
 
 // agenda
 
-var agenda = new Agenda({db: {address: config.db}});
 
 agenda.define('ai-do', {priority: 'high', concurrency: 1}, function(job, done) {
     logger.info('ai-do');
