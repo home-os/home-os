@@ -57,9 +57,9 @@ function Ai (name) {
             this.say(origin, 'I will wake you up ' + words.join(' '));
             this.run(origin, { id:'wake-up', time: words.join(' ') });
         } else if (this.hasWords(words, 'reminds me')) {
+            words.splice(0, 2);
             var indexOfTo = words.indexOf('to');
             if (indexOfTo > 0) {
-                words.splice(0, 2);
                 var schedule = words.splice(0, indexOfTo-1);
                 words.splice(0, 1);
                 this.say(origin, 'Ok I will do that');
