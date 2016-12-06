@@ -38,8 +38,10 @@ function Ai (name) {
     };
 
     this.do = function (task) {
-        if (task.id == 'reminder') {
+        if (task.cmd.id == 'reminder') {
             ai.say('default', 'Do no forget to ' + task.cmd.todo + ' (' + task.time + ')');
+        } else {
+            this.say(origin, 'Sorry, I don\'t know what you mean.', ':thinking_face:');
         }
     };
 
